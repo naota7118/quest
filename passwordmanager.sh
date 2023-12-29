@@ -16,7 +16,7 @@ do
    echo "パスワードを入力してください"
    read password
    array+=("$service" "$user" "$password")
-   echo ${array[0]}:${array[1]}:${array[2]} >> passwordlist
+   echo "$service $user $password" >> passwordlist
    echo "パスワードの追加は成功しました。"
    continue
    ;;
@@ -24,11 +24,12 @@ do
    echo "サービス名を入力してください"
    read service
    if grep "$service" passwordlist > /dev/null; then
-    echo -n "サービス名："
-    #$serviceを含む配列を取得
-    echo ${array[0]="$service"}
+    echo -n "ユーザー名："
+    awk '{if( $1 = "$service" ){print $2}}' passwordlist
+　  echo -n "パスワード："
+    awk '{if( $1 = "$service" ){print $3}}' passwordlist
    else
-    echo "そのサービスは登録されていません。"
+    echo "そのサービスは登録されていません" 
    fi
    continue
    ;;   
