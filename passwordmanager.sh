@@ -5,6 +5,8 @@ do
  echo "次の選択肢から入力してください(Add Password/Get Password/Exit)："
  read answer
 
+ declare -a array
+
  case $answer in
   "Add Password")
    echo "サービス名を入力してください"
@@ -13,7 +15,7 @@ do
    read user
    echo "パスワードを入力してください"
    read password
-   declare -a array=("$service" "$user" "$password")
+   array+=("$service" "$user" "$password")
    echo ${array[0]}:${array[1]}:${array[2]} >> passwordlist
    echo "パスワードの追加は成功しました。"
    continue
@@ -23,9 +25,8 @@ do
    read service
    if grep "$service" passwordlist > /dev/null; then
     echo -n "サービス名："
-    grep "$service" passwordlist
-    echo -n "ユーザー名："
-　　echo -n "パスワード："
+    #$serviceを含む配列を取得
+    echo ${array[0]="$service"}
    else
     echo "そのサービスは登録されていません。"
    fi
