@@ -25,9 +25,7 @@ do
    read service
    if grep "$service" passwordlist > /dev/null; then
     echo -n "ユーザー名："
-    awk '{if( $1 = "$service" ){print $2}}' passwordlist
-　  echo -n "パスワード："
-    awk '{if( $1 = "$service" ){print $3}}' passwordlist
+    awk '{print $2}' passwordlist
    else
     echo "そのサービスは登録されていません" 
    fi
