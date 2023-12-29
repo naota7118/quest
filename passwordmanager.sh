@@ -13,7 +13,8 @@ do
    read user
    echo "パスワードを入力してください"
    read password
-   echo "$service:$user:$password" >> passwordlist
+   declare -a array=("$service" "$user" "$password")
+   echo ${array[0]}:${array[1]}:${array[2]} >> passwordlist
    echo "パスワードの追加は成功しました。"
    continue
    ;;
