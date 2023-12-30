@@ -24,8 +24,11 @@ do
    echo "サービス名を入力してください"
    read service
    if grep "$service" passwordlist > /dev/null; then
+    echo "サービス名：$service"
     echo -n "ユーザー名："
-    awk '$1 == "侍エンジニア" {print $2}' passwordlist
+    awk '$1 == "'$service'" {print $2}' passwordlist
+    echo -n "パスワード："
+    awk '$1 == "'$service'" {print $3}' passwordlist
    else
     echo "そのサービスは登録されていません" 
    fi
