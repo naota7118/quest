@@ -16,7 +16,7 @@ do
    echo "$service:$user:$password" >> passwordlist
    echo "パスワードの追加は成功しました。"
    gpg -c passwordlist
-   rm passworlist
+   rm passwordlist
    continue
    ;;
   "Get Password")
